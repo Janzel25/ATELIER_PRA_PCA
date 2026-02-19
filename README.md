@@ -231,22 +231,23 @@ Faites preuve de pédagogie et soyez clair dans vos explications et procedures d
 **Exercice 1 :**  
 Quels sont les composants dont la perte entraîne une perte de données ?  
   
-*..Répondez à cet exercice ici..*
+Les composants qui entraînent une perte de données sont PVC pra-data (qui contient la base SQLite utilisé par Flask), PVC pra-backup (contient les sauvegardes périodiques par le CronJob Kubernetes) et Cronjob de sauvegarde (si CRON est désactivé alors il n'y a plus de sauvegarde donc perte de donnée)
 
 **Exercice 2 :**  
 Expliquez nous pourquoi nous n'avons pas perdu les données lors de la supression du PVC pra-data  
   
-*..Répondez à cet exercice ici..*
+les sauvegardes étaient stockés dans PVC pra-backup et cronjob créait automatiquement des sauvegardes chaque minute
 
 **Exercice 3 :**  
 Quels sont les RTO et RPO de cette solution ?  
-  
-*..Répondez à cet exercice ici..*
+
+RTO (Recovery time operation) : le temps nécessaire remettre le service en marche (5-10min)
+RPO (Recovery point operation) : le nombre maximum de minute de donnée perdues (1min)
 
 **Exercice 4 :**  
 Pourquoi cette solution (cet atelier) ne peux pas être utilisé dans un vrai environnement de production ? Que manque-t-il ?   
   
-*..Répondez à cet exercice ici..*
+
   
 **Exercice 5 :**  
 Proposez une archtecture plus robuste.   
