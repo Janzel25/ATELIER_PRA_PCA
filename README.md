@@ -247,12 +247,12 @@ RPO (Recovery point operation) : le nombre maximum de minute de donnée perdues 
 **Exercice 4 :**  
 Pourquoi cette solution (cet atelier) ne peux pas être utilisé dans un vrai environnement de production ? Que manque-t-il ?   
   
-
+Cette solution ne peut pas être utilisée en production, car SQLite est une base de données trop simple et fragile pour supporter une vraie charge ou assurer une haute disponibilité. Le stockage utilisé est local et non répliqué, une panne entraîne immédiatement une perte totale des données. L’application ne tourne qu’avec un seul pod, ça ne garantit aucune continuité de service si ce pod tombe. Les sauvegardes sont basiques et ne sont ni stockées à l’extérieur du cluster ni protégées par une véritable politique de rétention. Il n’y a aucun système de surveillance ou d’alertes pour détecter les problèmes.
   
 **Exercice 5 :**  
 Proposez une archtecture plus robuste.   
   
-*..Répondez à cet exercice ici..*
+Une architecture plus robuste utiliserait une base de données plus adaptée à la production comme PostgreSQL ou MySQL, car elles offrent de la réplication, de la haute disponibilité et des sauvegardes fiables. Le stockage devrait aussi être distribué et répliqué sur plusieurs nœuds pour d’éviter toute perte de donnée en cas de panne d’un serveur. L’application devrait tourner sur plusieurs pods derrière un Ingress Controller pour garantir la continuité de service même si un pod tombe. Les sauvegardes devraient être envoyées vers un stockage externe comme S3 ou Azure Blob, avec une vraie politique de rétention. Une solution de supervision comme Prometheus et Grafana devrait être déployée pour surveiller l’état du cluster et déclencher des alertes en cas de problème.
 
 ---------------------------------------------------
 Séquence 6 : Ateliers  
